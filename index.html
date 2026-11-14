@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MILLENNIUM.EXE — The Last 90 Seconds</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body class="y2k-bg">
+  <div id="app">
+    <!-- Top System Header Bar -->
+    <header class="system-bar">
+      <div class="system-bar-left">
+        <span class="system-dot"></span>
+        <span class="system-title">MILLENNIUM OS v2.000 [BUILD 1999.12.31]</span>
+      </div>
+      <div class="system-bar-center">
+        <span class="system-alert">SYSTEM INTEGRITY: COMPROMISED</span>
+      </div>
+      <div class="system-bar-right">
+        <button id="sound-toggle-btn" class="system-btn">🔊 SOUND: ON</button>
+        <button id="help-btn" class="system-btn">❓ HELP</button>
+        <span id="system-clock">12/31/1999 23:58:30</span>
+      </div>
+    </header>
+
+    <!-- Main Game Frame (960x640 with CRT styling) -->
+    <main class="viewport-wrapper">
+      <div class="monitor-bezel">
+        <div id="game-container"></div>
+        <div class="crt-overlay"></div>
+        <div class="scanlines"></div>
+
+        <!-- Title Screen / Boot Screen Overlay -->
+        <div id="title-overlay" class="y2k-screen-overlay">
+          <div class="y2k-atmosphere" aria-hidden="true">
+            <div class="horizon-sun"></div>
+            <div class="wire-horizon"></div>
+            <div class="window-stack window-stack-a"></div>
+            <div class="window-stack window-stack-b"></div>
+            <div class="chrome-orb chrome-orb-a"></div>
+            <div class="chrome-orb chrome-orb-b"></div>
+          </div>
+          <div class="boot-terminal">
+            <p>> AWARD MODULAR BIOS v4.51PG // SYSTEM MEMORY CHECK: 128MB OK</p>
+            <p>> CRITICAL WARNING: YEAR 2000 BUFFER OVERFLOW IMMINENT</p>
+            <p>> RUNNING EMERGENCY DEFENSE: MILLENNIUM.EXE</p>
+          </div>
+
+          <div class="title-hero">
+            <p class="hero-kicker">// 1999 CYBER-SURVIVAL SIMULATION //</p>
+            <h1 class="logo-title">MILLENNIUM.EXE</h1>
+            <p class="logo-subtitle">THE LAST 90 SECONDS.</p>
+            <div class="logo-badge">Y2K ARCADIAN SURVIVAL PROTOCOL</div>
+          </div>
+
+          <div class="title-actions">
+            <button id="start-game-btn" class="y2k-btn y2k-btn-primary">
+              ▶ INITIATE DEFENSE PROTOCOL [ START ]
+            </button>
+            <button id="open-controls-btn" class="y2k-btn y2k-btn-secondary">
+              📖 SYSTEM MANUAL & CONTROLS
+            </button>
+          </div>
+
+          <div class="title-footnote">
+            PRESS SPACE TO SACRIFICE TIME & FREEZE ENEMIES // SURVIVE UNTIL 00:00 FOR THE FINAL TRANSITION
+          </div>
+        </div>
+
+        <!-- Controls Modal Overlay -->
+        <div id="controls-modal" class="modal-overlay hidden">
+          <div class="win98-window">
+            <div class="win98-title-bar">
+              <span class="win98-title-text">💾 MILLENNIUM.EXE — OPERATOR MANUAL</span>
+              <button id="close-controls-btn" class="win98-close-btn">✕</button>
+            </div>
+            <div class="win98-content">
+              <div class="manual-section">
+                <h3>🕹️ FLIGHT CONTROLS</h3>
+                <div class="ctrl-grid">
+                  <div class="ctrl-row"><span>WASD / ARROW KEYS</span><span>Move Emergency Maintenance Program</span></div>
+                  <div class="ctrl-row"><span>MOUSE</span><span>Aim Data Laser Cannon</span></div>
+                  <div class="ctrl-row"><span>LEFT CLICK (HOLD)</span><span>Rapid Fire Data Packets</span></div>
+                  <div class="ctrl-row"><span>ESC</span><span>Pause Simulation / Adjust Audio</span></div>
+                </div>
+              </div>
+
+              <div class="manual-section highlight-box">
+                <h3>⏳ THE SECRET COUNTDOWN MECHANIC</h3>
+                <p>The operating system counts down from <strong>90 seconds</strong> to the year 2000.</p>
+                <p><strong>SPACE — TEMPORAL FREEZE:</strong> Sacrifices <strong>-5 seconds</strong> from the countdown to freeze all corrupted enemies for 3 seconds. High risk, high reward!</p>
+                <p><strong>CHRONOMETER FRAGMENTS (+5s):</strong> Collect glowing clocks to restore lost time.</p>
+                <p><strong>DATA CHIPS (+100 DATA):</strong> Collect purple diamonds from fallen foes for high score.</p>
+              </div>
+
+              <div class="manual-section">
+                <h3>⚠️ THE MILLENNIUM TRANSITION (00:00)</h3>
+                <p>Surviving to 00:00 does not end the game — it triggers the <strong>Millennium Event</strong>, awakening the final mainframe malware: <strong>Y2K-CORE</strong>. Destroy it to save the millennium!</p>
+              </div>
+
+              <div class="manual-btn-row">
+                <button id="modal-start-btn" class="y2k-btn y2k-btn-primary">LAUNCH GAME NOW</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Bottom Status Bar / Controls Hint -->
+    <footer class="system-footer">
+      <div class="footer-segment">
+        <span class="key-hint">WASD / ARROWS</span> MOVE
+      </div>
+      <div class="footer-segment">
+        <span class="key-hint">MOUSE</span> AIM & FIRE
+      </div>
+      <div class="footer-segment">
+        <span class="key-hint">SPACE</span> TEMPORAL FREEZE (-5s)
+      </div>
+      <div class="footer-segment">
+        <span class="key-hint">ESC</span> PAUSE
+      </div>
+    </footer>
+  </div>
+
+  <script type="module" src="./src/main.ts"></script>
+</body>
+</html>
