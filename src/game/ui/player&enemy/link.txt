@@ -1,0 +1,9 @@
+link to the game :
+
+https://millennium-exe.netlify.app/
+
+hackathon project, built in 4h
+
+survival game with a hint of y2k vibes
+
+you might want to click " ctrl + or - " to zoom in out, page isnt adapted

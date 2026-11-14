@@ -4,6 +4,7 @@ import { audioSystem } from './game/systems/AudioSystem';
 
 let gameInstance: Phaser.Game | null = null;
 let gameStarted: boolean = false;
+let storyScrollTimer: number | undefined;
 
 // Exposed globally so GameScene can check whether to start gameplay
 (window as any).__MILLENNIUM_STARTED = false;
@@ -27,8 +28,10 @@ function startGameFlow() {
 
   const titleOverlay = document.getElementById('title-overlay');
   const controlsModal = document.getElementById('controls-modal');
+  const storyModal = document.getElementById('story-modal');
 
   if (controlsModal) controlsModal.classList.add('hidden');
+  if (storyModal) storyModal.classList.add('hidden');
 
   if (titleOverlay) {
     titleOverlay.classList.add('hidden');
@@ -62,6 +65,10 @@ function setupUIEventListeners() {
   const helpBtn = document.getElementById('help-btn');
   const closeControlsBtn = document.getElementById('close-controls-btn');
   const controlsModal = document.getElementById('controls-modal');
+  const storyBtn = document.getElementById('open-story-btn');
+  const storyModal = document.getElementById('story-modal');
+  const closeStoryBtn = document.getElementById('close-story-btn');
+  const storyScroll = document.getElementById('story-scroll');
 
   const openModal = () => {
     if (controlsModal) controlsModal.classList.remove('hidden');
@@ -74,6 +81,30 @@ function setupUIEventListeners() {
   if (controlsBtn) controlsBtn.addEventListener('click', openModal);
   if (helpBtn) helpBtn.addEventListener('click', openModal);
   if (closeControlsBtn) closeControlsBtn.addEventListener('click', closeModal);
+
+  const closeStory = () => {
+    if (storyScrollTimer !== undefined) window.clearInterval(storyScrollTimer);
+    storyScrollTimer = undefined;
+    if (storyModal) storyModal.classList.add('hidden');
+  };
+
+  const openStory = () => {
+    if (!storyModal || !storyScroll) return;
+    if (controlsModal) controlsModal.classList.add('hidden');
+    storyModal.classList.remove('hidden');
+    storyScroll.scrollTop = 0;
+    if (storyScrollTimer !== undefined) window.clearInterval(storyScrollTimer);
+    storyScrollTimer = window.setInterval(() => {
+      storyScroll.scrollTop += 0.55;
+      if (storyScroll.scrollTop + storyScroll.clientHeight >= storyScroll.scrollHeight - 2) {
+        if (storyScrollTimer !== undefined) window.clearInterval(storyScrollTimer);
+        storyScrollTimer = undefined;
+      }
+    }, 30);
+  };
+
+  if (storyBtn) storyBtn.addEventListener('click', openStory);
+  if (closeStoryBtn) closeStoryBtn.addEventListener('click', closeStory);
 }
 
 // Update top header simulation clock
